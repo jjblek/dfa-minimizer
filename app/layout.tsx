@@ -10,11 +10,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'DFA Flow',
   description: 'An interactive tool for designing, editing, and minimizing deterministic finite automata (DFA). Visualize state transitions, minimize automata, and export results effortlessly.',
-  // Open Graph for social sharing
-  openGraph: {
-    url: "https://dfa-flow.vercel.app/",
-    type: "website",
-  },
 }
 
 export default function RootLayout({
