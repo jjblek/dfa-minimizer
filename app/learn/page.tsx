@@ -5,7 +5,7 @@ export default function Learn() {
                 Learn DFA
             </h1>
             <p className="mt-4 text-gray-700 dark:text-gray-300">
-                Welcome to the Learn page! Here, you'll find interactive tutorials and explanations about Deterministic Finite Automata (DFA).
+                Welcome to the Learn page! Here, you&apos;ll find interactive tutorials and explanations about Deterministic Finite Automata (DFA).
             </p>
             
             {/* Section 1: What is a DFA? */}

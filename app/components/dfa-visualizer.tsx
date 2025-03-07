@@ -184,7 +184,7 @@ const DfaVisualizer = () => {
             ...createEdges(originalDfa, false, isAnimated), 
             ...createEdges(minimizedDfa, true, isAnimated)
         ]);
-    }, [originalDfa, minimizedDfa, isAnimated, createNodes, createEdges, theme, stateColors]);
+    }, [originalDfa, minimizedDfa, isAnimated, theme, stateColors]);
     
     return (
             <ReactFlow
