@@ -38,14 +38,15 @@ function FloatingEdge(props: EdgeProps) {
 
     const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode);
 
-    // Check if the edge is bi-directional
-    const isBiDirectionalEdge = useStore((s: ReactFlowState) =>
-        s.edges.some((e) =>
-            (e.source === target && e.target === source) ||
-            (e.target === source && e.source === target)
-        )
-    );
+    const edges = useStore((state: ReactFlowState) => state.edges);
 
+    // Check if the edge is bi-directional
+    const isBiDirectionalEdge = edges.some(
+    (e) =>
+        (e.source === target && e.target === source) ||
+        (e.target === source && e.source === target)
+    );
+    
     // Adjust curve offset for bi-directional edges
     const offset = 30; // Adjust to control curve spacing
     let edgePath, labelX, labelY;

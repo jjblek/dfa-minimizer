@@ -27,7 +27,7 @@ export default function Learn() {
             <section className="mt-6">
                 <h2 className="text-2xl font-semibold">How Does a DFA Work?</h2>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
-                    A DFA processes input strings by reading symbols one by one and transitioning between states based on its transition function. It always knows exactly which state it's in.
+                    A DFA processes input strings by reading symbols one by one and transitioning between states based on its transition function. It always knows exactly which state it&apos;s in.
                 </p>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
                     If the DFA reaches a final (accepting) state after reading the entire input string, it accepts the string. Otherwise, it rejects it.

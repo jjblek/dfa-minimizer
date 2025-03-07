@@ -184,7 +184,7 @@ const DfaVisualizer = () => {
             ...createEdges(originalDfa, false, isAnimated), 
             ...createEdges(minimizedDfa, true, isAnimated)
         ]);
-    }, [originalDfa, minimizedDfa, isAnimated, theme, stateColors]);
+    }, [originalDfa, minimizedDfa, isAnimated, theme, stateColors, setEdges, setNodes]);
     
     return (
             <ReactFlow
@@ -193,7 +193,9 @@ const DfaVisualizer = () => {
                 edges={edges}
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
-                edgeTypes={{ selfConnecting: SelfConnecting, floating: FloatingEdge }}
+                edgeTypes={{ 
+                    selfConnecting: (props) => <SelfConnecting {...props} theme={theme ? theme : 'light'} />, 
+                    floating: FloatingEdge }}
                 nodeTypes={{ custom: CustomNode }}
                 connectionMode={ConnectionMode.Loose}
                 colorMode={colorMode}

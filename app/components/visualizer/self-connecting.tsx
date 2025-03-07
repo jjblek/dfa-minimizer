@@ -2,12 +2,12 @@ import { BezierEdge, EdgeProps, BaseEdge, EdgeLabelRenderer } from '@xyflow/reac
 import { useTheme } from 'next-themes';
 import { memo } from "react";
 // Custom Self-Connecting Edge component
-const SelfConnecting: React.FC<EdgeProps> = (props) => {
+const SelfConnecting: React.FC<EdgeProps & { theme: string }> = (props) => {
     if (props.source !== props.target) {
         return <BezierEdge {...props} />;
     }
     
-    const { source, target, sourceX, sourceY, targetX, targetY, id, markerEnd, label } = props;
+    const { source, target, sourceX, sourceY, targetX, targetY, id, markerEnd, label, theme } = props;
 
     // Custom positions for the self-connecting edge based on Position enum
     const radiusX = 30; // Control the width of the loop
@@ -28,7 +28,7 @@ const SelfConnecting: React.FC<EdgeProps> = (props) => {
     // Offset for the label to position it near the loop
     const labelX = sourceX + 40 ;
     const labelY = sourceY + 10; // Adjust for better spacing
-    const { theme } = useTheme();
+
     return (
         <>
             <BaseEdge id={id} path={edgePath} markerEnd={markerEnd} 
