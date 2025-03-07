@@ -2,14 +2,12 @@ import {
     getBezierPath,
     useInternalNode,
     EdgeLabelRenderer,
-    useStore,
-    ReactFlowState,
     EdgeProps,
     BaseEdge,
+    type Edge,
 } from "@xyflow/react";
 
 import { getEdgeParams } from "./utils";
-import { useTheme } from "next-themes";
 import { memo } from "react";
 export type GetSpecialPathParams = {
     sourceX: number;
@@ -26,10 +24,13 @@ export const getSpecialPath = ({ sourceX, sourceY, targetX, targetY }: GetSpecia
 
     return `M ${sourceX} ${sourceY} Q ${centerX} ${centerY + offset} ${targetX} ${targetY}`;
 };
+interface FloatingEdgeProps extends EdgeProps {
+    edges: Edge[];
+    theme: string;
+}
+function FloatingEdge(props: FloatingEdgeProps) {
 
-function FloatingEdge(props: EdgeProps) {
-    const { theme } = useTheme();
-    const { source, target, id, markerEnd, label, style } = props;
+    const { source, target, id, markerEnd, label, style, theme, edges } = props;
 
     const sourceNode = useInternalNode(source);
     const targetNode = useInternalNode(target);
@@ -38,15 +39,13 @@ function FloatingEdge(props: EdgeProps) {
 
     const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode);
 
-    const edges = useStore((state: ReactFlowState) => state.edges);
-
     // Check if the edge is bi-directional
     const isBiDirectionalEdge = edges.some(
     (e) =>
         (e.source === target && e.target === source) ||
         (e.target === source && e.source === target)
     );
-    
+
     // Adjust curve offset for bi-directional edges
     const offset = 30; // Adjust to control curve spacing
     let edgePath, labelX, labelY;

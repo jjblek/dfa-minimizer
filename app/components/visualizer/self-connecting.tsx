@@ -1,8 +1,11 @@
 import { BezierEdge, EdgeProps, BaseEdge, EdgeLabelRenderer } from '@xyflow/react'; // Use BezierEdge if BaseEdge is unavailable
-import { useTheme } from 'next-themes';
 import { memo } from "react";
+
+interface SelfConnectingProps extends EdgeProps {
+    theme: string;
+}
 // Custom Self-Connecting Edge component
-const SelfConnecting: React.FC<EdgeProps & { theme: string }> = (props) => {
+function SelfConnecting (props: SelfConnectingProps) {
     if (props.source !== props.target) {
         return <BezierEdge {...props} />;
     }

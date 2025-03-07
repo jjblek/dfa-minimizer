@@ -195,7 +195,7 @@ const DfaVisualizer = () => {
                 onEdgesChange={onEdgesChange}
                 edgeTypes={{ 
                     selfConnecting: (props) => <SelfConnecting {...props} theme={theme ? theme : 'light'} />, 
-                    floating: FloatingEdge }}
+                    floating: (props) => <FloatingEdge {...props} edges={edges} theme={theme ? theme : 'light'} /> }}
                 nodeTypes={{ custom: CustomNode }}
                 connectionMode={ConnectionMode.Loose}
                 colorMode={colorMode}
