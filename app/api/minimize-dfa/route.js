@@ -1,12 +1,14 @@
 // app/api/minimize-dfa/route.js
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(req) {
+  
     try {
       // Get the DFA data from the request
       const dfaData = await req.json();
   
       // Make a request to Flask API
-      const response = await fetch("https://83502n3ua8.execute-api.us-east-1.amazonaws.com/production/minimize", {
+      const response = await fetch(`${API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
