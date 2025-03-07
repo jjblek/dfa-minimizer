@@ -38,7 +38,7 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a href="https://github.com/jjblek" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-hover" onClick={closeMenu}>
+                                <a href="https://github.com/jjblek/dfa-minimizer" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline text-hover" onClick={closeMenu}>
                                     <FaGithub /> GitHub
                                 </a>
                             </li>
