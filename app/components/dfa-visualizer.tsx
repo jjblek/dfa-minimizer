@@ -37,6 +37,11 @@ export interface StateColors {
     default: string;
 }
 
+interface DfaVisualizerProps {
+    stateColors: StateColors;
+    updateColor: (type: "start" | "final" | "default", color: string) => void;
+}
+
 // Helper function to create nodes
 const createNodes = (dfaData: DfaData, isMinimized: boolean, xOffset = 0, theme: string | undefined, stateColors: StateColors): Node[] => {
     const { states, start, final } = dfaData;
@@ -128,7 +133,7 @@ const defaultMinimizedDFA = {
     }
 }
 
-const DfaVisualizer = () => {
+const DfaVisualizer = ({stateColors, updateColor}: DfaVisualizerProps) => {
 
     const [originalDfa, setOriginalDfa] = useState<DfaData>(defaultDFA);
     const [minimizedDfa, setMinimizedDfa] = useState<DfaData>(defaultMinimizedDFA);
@@ -138,35 +143,6 @@ const DfaVisualizer = () => {
     const [isAnimated, setIsAnimated] = useState(true);
     const [colorMode, setColorMode] = useState<ColorMode>("light");
     const { theme } = useTheme();
-    const [stateColors, setStateColors] = useState({
-        start: "#3b82f6",
-        final: "#22c55e",
-        default: "#14b8a6",
-    });
-    // Load colors from localStorage on mount
-    useEffect(() => {
-        const storedColors = {
-            start: localStorage.getItem("startStateColor") || "#3b82f6",
-            final: localStorage.getItem("finalStateColor") || "#22c55e",
-            default: localStorage.getItem("defaultStateColor") || "#14b8a6",
-        };
-        setStateColors(storedColors);
-    }, []);
-
-    // Store colors in localStorage when stateColors changes
-    useEffect(() => {
-        localStorage.setItem("startStateColor", stateColors.start);
-        localStorage.setItem("finalStateColor", stateColors.final);
-        localStorage.setItem("defaultStateColor", stateColors.default);
-    }, [stateColors]);
-
-    // Function to update colors
-    const updateColor = (type: "start" | "final" | "default", color: string) => {
-        setStateColors(prevColors => ({
-            ...prevColors,
-            [type]: color,
-        }));
-    };
 
     useEffect(() => {
         setMounted(true);

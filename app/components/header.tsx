@@ -3,7 +3,14 @@ import Link from 'next/link';
 import { MdMenu } from "react-icons/md";
 import { useState } from 'react';
 import { FaGithub } from "react-icons/fa";
-const Header = () => {
+import { StateColors } from './dfa-visualizer';
+
+interface HeaderProps {
+    stateColors: StateColors
+    updateColor: (type: "start" | "final" | "default", color: string) => void;
+}
+
+const Header = ({stateColors, updateColor}: HeaderProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -19,8 +26,13 @@ const Header = () => {
 
     return (
         <header className="bg-gray-50 dark:bg-[#1a1a1a] py-4">
-            <div className="flex items-center justify-between px-6 sm:px-10">
-            <h1 className="text-xl sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#3b82f6] via-[#14b8a6] to-[#22c55e]">
+            <div className="flex items-center justify-between px-6 sm:px-10" >
+            <h1 className="text-xl sm:text-2xl font-semibold bg-clip-text text-transparent "
+                style={{
+                    backgroundImage: `linear-gradient(to right, ${stateColors.start}, ${stateColors.default}, ${stateColors.final})`
+                
+                }}
+            >
                 DFA Flow
             </h1>
                 <div className="flex items-center space-x-6">
