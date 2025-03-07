@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="data-theme">
+        <ThemeProvider attribute="data-theme" enableSystem={false}>
           <div className='min-h-screen flex flex-col'>
           <Header />
           {children}
