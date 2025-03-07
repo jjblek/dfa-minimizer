@@ -2,7 +2,6 @@ import { ThemeProvider } from 'next-themes'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import '@xyflow/react/dist/style.css';
-import Head from 'next/head';
 import Header from './components/header';
 import Footer from './components/footer';
 
@@ -25,9 +24,6 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-      </Head>
       <body className={inter.className}>
         <ThemeProvider attribute="data-theme">
           <div className='min-h-screen flex flex-col'>
