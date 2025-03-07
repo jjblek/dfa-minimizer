@@ -38,7 +38,7 @@ const ColorProvider = () => {
     return (
         <div className='min-h-screen flex flex-col'>  
             <Header stateColors={stateColors} updateColor={updateColor}/>
-                <div className='w-full h-[85vh] p-2 sm:p-4 md:p-8'>
+                <div className='w-full h-[80vh] p-2 sm:p-4 md:p-8 flex grow'>
                     <DfaVisualizer stateColors={stateColors} updateColor={updateColor} />
                 </div>
             <Footer/>
