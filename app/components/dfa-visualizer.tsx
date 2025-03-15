@@ -241,7 +241,7 @@ const DfaVisualizer = () => {
                         <MiniMap className='hidden sm:block' zoomable pannable/>
                     </>
                 : null}
-                <ToastContainer position='bottom-right' theme={theme} stacked/>
+                <ToastContainer position='bottom-right' theme={theme} stacked />
             </ReactFlow>
 
     );

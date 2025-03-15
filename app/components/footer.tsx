@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className="fixed bottom-0 w-full bg-gray-50 dark:bg-[#1a1a1a] py-4 sm:py-6">
+        <footer className="w-full bg-gray-50 dark:bg-[#1a1a1a] py-4 sm:py-6">
             <div className=" px-4 flex justify-between items-center">
                 <p className="text-[10px] sm:text-xs mr-2">
                     &copy; {new Date().getFullYear()} DFA Flow. All rights reserved.

@@ -23,11 +23,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="data-theme" enableSystem={false}>
           <ColorProvider>
+          <div className='flex flex-col justify-between h-[100vh]'>
             <Header/>
-            <div className='my-16'>
+            <div className='mt-[70px]'>
               {children}
             </div>
             <Footer/>
+            </div>
           </ColorProvider>
         </ThemeProvider>
       </body>
