@@ -3,14 +3,10 @@ import Link from 'next/link';
 import { MdMenu } from "react-icons/md";
 import { useState } from 'react';
 import { FaGithub } from "react-icons/fa";
-import { StateColors } from './dfa-visualizer';
+import { useColorContext } from './color-provider';
 
-interface HeaderProps {
-    stateColors: StateColors
-    updateColor: (type: "start" | "final" | "default", color: string) => void;
-}
-
-const Header = ({stateColors, updateColor}: HeaderProps) => {
+const Header = () => {
+    const { stateColors } = useColorContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -25,8 +21,9 @@ const Header = ({stateColors, updateColor}: HeaderProps) => {
     };
 
     return (
-        <header className="bg-gray-50 dark:bg-[#1a1a1a] py-4">
+        <header className="bg-gray-50 dark:bg-[#1a1a1a] py-4 fixed top-0 z-50 w-full">
             <div className="flex items-center justify-between px-6 sm:px-10" >
+            <Link href={'/'}>
             <h1 className="text-xl sm:text-2xl font-semibold bg-clip-text text-transparent "
                 style={{
                     backgroundImage: `linear-gradient(to right, ${stateColors.start}, ${stateColors.default}, ${stateColors.final})`
@@ -35,6 +32,7 @@ const Header = ({stateColors, updateColor}: HeaderProps) => {
             >
                 DFA Flow
             </h1>
+            </Link>
                 <div className="flex items-center space-x-6">
                     {/* Desktop Menu */}
                     <nav className="hidden sm:block">

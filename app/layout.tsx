@@ -1,7 +1,8 @@
-import { ThemeProvider } from 'next-themes'
 import './globals.css'
-import { Inter } from 'next/font/google'
 import '@xyflow/react/dist/style.css';
+import { Inter } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
+import { ColorProvider } from './components/color-provider';
 import Header from './components/header';
 import Footer from './components/footer';
 
@@ -21,7 +22,13 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="data-theme" enableSystem={false}>
-          {children}
+          <ColorProvider>
+            <Header/>
+            <div className='my-16'>
+              {children}
+            </div>
+            <Footer/>
+          </ColorProvider>
         </ThemeProvider>
       </body>
     </html>

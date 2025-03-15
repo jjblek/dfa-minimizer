@@ -19,9 +19,10 @@ import {
 
 import InteractiveDfaEditor from './visualizer/editor/interactive-dfa-editor';
 import ThemeToggle from './ui/theme-toggle';
-import { MdAnimation } from 'react-icons/md';
+import { MdAnimation, MdClose } from 'react-icons/md';
 import { useTheme } from 'next-themes';
 import { ToastContainer } from 'react-toastify';
+import { useColorContext } from './color-provider';
 
 export interface DfaData {
     states: string[];
@@ -111,29 +112,41 @@ const createEdges = (dfaData: DfaData, isMinimized: boolean, isAnimated: boolean
 };
 
 const defaultDFA = {
-    "states": ["q0", "q1", "q2"],
-    "start": "q0",
-    "final": ["q1", "q2"],
+    "states": ["s0", "s1", "s2"],
+    "start": "s0",
+    "final": ["s1", "s2"],
     "alphabet": ["0", "1"],
     "transitions": {
-        "q0": {"0": "q2", "1": "q1"},
-        "q1": {"0": "q1", "1": "q2"},
-        "q2": {"0": "q2", "1": "q2"}
+        "s0": {"0": "s2", "1": "s1"},
+        "s1": {"0": "s1", "1": "s2"},
+        "s2": {"0": "s2", "1": "s2"}
     }
 }
 
 const defaultMinimizedDFA = {
-    "states": ["q0", "q1q2"],
-    "start": "q0",
-    "final": ["q1q2"],
+    "states": ["s0", "s1s2"],
+    "start": "s0",
+    "final": ["s1s2"],
     "alphabet": ["0", "1"],
     "transitions": {
-        "q0": {"0": "q1q2", "1": "q1q2"},
-        "q1q2": {"0": "q1q2", "1": "q1q2"},
+        "s0": {"0": "s1s2", "1": "s1s2"},
+        "s1s2": {"0": "s1s2", "1": "s1s2"},
     }
 }
 
-const DfaVisualizer = ({stateColors, updateColor}: DfaVisualizerProps) => {
+const dfaExample = `{
+    "states": ["s0", "s1", "s2"],
+    "start": "s0",
+    "final": ["s1", "s2"],
+    "alphabet": ["0", "1"],
+    "transitions": {
+        "s0": {"0": "s2", "1": "s1"},
+        "s1": {"0": "s1", "1": "s2"},
+        "s2": {"0": "s2", "1": "s2"}
+    }
+}`
+
+const DfaVisualizer = () => {
 
     const [originalDfa, setOriginalDfa] = useState<DfaData>(defaultDFA);
     const [minimizedDfa, setMinimizedDfa] = useState<DfaData>(defaultMinimizedDFA);
@@ -142,8 +155,9 @@ const DfaVisualizer = ({stateColors, updateColor}: DfaVisualizerProps) => {
     const [mounted, setMounted] = useState(false);
     const [isAnimated, setIsAnimated] = useState(true);
     const [colorMode, setColorMode] = useState<ColorMode>("light");
+    const { stateColors, updateColor } = useColorContext();
     const { theme } = useTheme();
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -202,8 +216,28 @@ const DfaVisualizer = ({stateColors, updateColor}: DfaVisualizerProps) => {
                         </Panel>
                         
                         <Panel position='bottom-center'>
-                            <DfaUploader setOriginalDfa={setOriginalDfa}/>
+                            <DfaUploader setOriginalDfa={setOriginalDfa} setIsModalOpen={setIsModalOpen}/>
                         </Panel>
+
+                        {isModalOpen && (
+                            <div className="fixed inset-0 flex items-center justify-center bg-[#00000099] z-50">
+                                <div className="relative bg-white dark:bg-[#1a1a1a] p-6 rounded-lg shadow-lg w-96">
+                                    <h2 className="text-lg font-bold mb-4">
+                                        DFA File Format
+                                    </h2>
+                                    <pre className="bg-gray-200 dark:bg-[#2b2b2b] p-4 rounded-md text-xs overflow-auto">
+                                        {dfaExample}
+                                    </pre>
+                                    <button 
+                                        className="absolute top-6 right-6 bg-gray-200 dark:bg-[#2b2b2b] hover:bg-red-500 dark:hover:bg-red-800 p-2 rounded-full"
+                                        onClick={() => setIsModalOpen(false)}
+                                    >
+                                        <MdClose/>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
                         <MiniMap className='hidden sm:block' zoomable pannable/>
                     </>
                 : null}

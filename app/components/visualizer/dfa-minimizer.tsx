@@ -39,12 +39,6 @@ export default function DfaMinimizer({ originalDfa, setMinimizedDfa }: DfaMinimi
             toast.error("A DFA must have at least one transition from the starting state.");
             return;
         }
-        
-        // DFA input is unchanged
-        else if (originalDfa === previousDfa) {
-            toast.error("The DFA is already minimized, upload or create a new DFA.");
-            return
-        }
 
         try {
             const response = await fetch("/api/minimize-dfa", {

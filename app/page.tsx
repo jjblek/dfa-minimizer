@@ -1,4 +1,5 @@
-import ColorProvider from './components/color-provider'
+import DfaVisualizer from "./components/dfa-visualizer"
+
 export const metadata = {
   openGraph: {
     url: "https://dfa-flow.vercel.app/",
@@ -9,8 +10,10 @@ export const metadata = {
 export default function Home() {
 
   return (
-    <main className="flex-grow">
-        <ColorProvider/>
+    <main className="">
+      <div className='w-full h-[85vh] p-2 sm:p-4 md:p-8'>
+          <DfaVisualizer />
+      </div>
     </main>
   )
 }

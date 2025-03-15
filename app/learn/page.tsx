@@ -1,11 +1,19 @@
+'use client'
+import { useColorContext } from '../components/color-provider';
+
 export default function Learn() {
+    const { stateColors } = useColorContext();
     return (
         <main className="max-w-3xl mx-auto p-6 flex-grow">
-            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#3b82f6] via-[#14b8a6] to-[#22c55e]">
-                Learn DFA
+            <h1 className="text-3xl font-bold bg-clip-text text-transparent mt-4"
+            style={{
+                backgroundImage: `linear-gradient(to right, ${stateColors.start}, ${stateColors.default}, ${stateColors.final})`
+            
+            }}>
+                Learn
             </h1>
             <p className="mt-4 text-gray-700 dark:text-gray-300">
-                Welcome to the Learn page! Here, you&apos;ll find interactive tutorials and explanations about Deterministic Finite Automata (DFA).
+                Here, you&apos;ll find information about Deterministic Finite Automata (DFA).
             </p>
             
             {/* Section 1: What is a DFA? */}
@@ -42,6 +50,7 @@ export default function Learn() {
                     <li><strong>q₀</strong>: The start state</li>
                     <li><strong>F</strong>: A set of final (accepting) states</li>
                 </ul>
+                
             </section>
         </main>
     );

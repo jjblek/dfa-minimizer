@@ -3,12 +3,14 @@ import { useState, ChangeEvent } from "react";
 import { DfaData } from "../dfa-visualizer";
 import IconButton from "../ui/icon-button";
 import { MdUpload, MdExpandMore } from "react-icons/md";
-
+import { MdInfo } from "react-icons/md";
+import { IoInformation } from "react-icons/io5";
 interface DfaUploaderProps {
     setOriginalDfa: (dfa: DfaData) => void;
+    setIsModalOpen: any
 }
 
-export default function DfaUploader({ setOriginalDfa }: DfaUploaderProps) {
+export default function DfaUploader({ setOriginalDfa, setIsModalOpen }: DfaUploaderProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const isValidDfa = (dfa: any): dfa is DfaData => {
         return (
@@ -53,18 +55,22 @@ export default function DfaUploader({ setOriginalDfa }: DfaUploaderProps) {
                 {isExpanded ? <MdExpandMore/> : <MdUpload/>}
             </IconButton>
             {isExpanded ? 
-            <div
-                className="border-2 border-dashed border-gray-300 p-6 rounded-md flex flex-col justify-center items-center cursor-pointer hover:border-indigo-500"
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={handleDrop}
-            >
-                <input id="dfaFile" className="hidden" type="file" accept=".json" onChange={handleFileChange}/>
-                <label htmlFor="dfaFile" 
-                    className="bg-[#fefefe] hover:bg-[#eee] dark:bg-[#2b2b2b] dark:hover:bg-[#5b5b5b] py-2 px-4 rounded-xs mb-4 cursor-pointer text-xs sm:text:sm lg:text-base react-flow__controls">
-                    Upload DFA.json
-                </label>
-                <p className="text-xs lg:text-sm">Or drag and drop your file here</p>
-            </div> : null}
+                <div
+                    className="relative border-2 border-dashed border-gray-300 p-6 rounded-md flex flex-col justify-center items-center hover:border-indigo-500"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleDrop}
+                >
+                    <IconButton onClick={() => setIsModalOpen(true)} className="absolute top-2 right-2 ">
+                        <IoInformation className=""/>
+                    </IconButton>
+                    <input id="dfaFile" className="hidden" type="file" accept=".json" onChange={handleFileChange}/>
+                    <label htmlFor="dfaFile" 
+                        className="bg-[#fefefe] hover:bg-[#eee] dark:bg-[#2b2b2b] dark:hover:bg-[#5b5b5b] py-2 px-4 rounded-xs mb-4 cursor-pointer text-xs sm:text:sm lg:text-base react-flow__controls">
+                        Upload DFA
+                    </label>
+                    <p className="text-xs lg:text-sm">Or drag and drop your file here</p>
+                </div> 
+            : null}
         </div>
     );
 }
