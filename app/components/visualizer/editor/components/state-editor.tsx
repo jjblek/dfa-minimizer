@@ -25,7 +25,7 @@ export default function StateEditor({ states, removeState, addState, color, upda
                 {states.map(state => (
                     <div key={state} className="flex items-center gap-2">
                         <span className="flex w-full  px-2 py-1 rounded border border-gray-200">{state}</span>
-                        <IconButton color="red"
+                        <IconButton
                             onClick={() => {
                                 removeState(state);
                             }}

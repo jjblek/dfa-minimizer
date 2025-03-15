@@ -37,7 +37,7 @@ export default function TransitionEditor({ states, alphabet, transitions, update
                                     ))}
                                 </select>
                                 {transitions[state]?.[symbol] && (
-                                    <IconButton onClick={() => removeTransition(state, symbol)} color="red">
+                                    <IconButton onClick={() => removeTransition(state, symbol)}>
                                         <FaMinus/>
                                     </IconButton>
                                 )}
