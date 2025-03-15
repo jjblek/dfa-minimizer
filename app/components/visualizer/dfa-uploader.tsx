@@ -3,11 +3,11 @@ import { useState, ChangeEvent } from "react";
 import { DfaData } from "../dfa-visualizer";
 import IconButton from "../ui/icon-button";
 import { MdUpload, MdExpandMore } from "react-icons/md";
-import { MdInfo } from "react-icons/md";
 import { IoInformation } from "react-icons/io5";
+
 interface DfaUploaderProps {
     setOriginalDfa: (dfa: DfaData) => void;
-    setIsModalOpen: any
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function DfaUploader({ setOriginalDfa, setIsModalOpen }: DfaUploaderProps) {

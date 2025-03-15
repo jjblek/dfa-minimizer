@@ -31,7 +31,7 @@
 
 /* Dark Mode */
 .dark .custom-scrollbar::-webkit-scrollbar-track {
-  background: #374151; /* Gray-700 */
+  background: #1a1a1a; /* Gray-700 */
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {

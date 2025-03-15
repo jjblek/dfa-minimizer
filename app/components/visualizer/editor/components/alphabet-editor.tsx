@@ -38,7 +38,7 @@ export default function AlphabetEditor({ alphabet, updateSymbol, addSymbol, remo
                                 Update
                             </button>
                         </div>
-                        <IconButton onClick={() => removeSymbol(symbol)} color="red">
+                        <IconButton onClick={() => removeSymbol(symbol)}>
                             <FaMinus />
                         </IconButton>
                     </div>
